@@ -1,0 +1,52 @@
+﻿@model MvcProject.Models.Comment
+
+@{
+    ViewBag.Title = "CatalogPage";
+    Layout = "_Layout";
+}
+
+
+    <p><img id="img" src="~/Images/@ViewBag.SelectedAnimal.PictureName"></p>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <tr>
+                <th>Name</th>
+                <td>@ViewBag.SelectedAnimal.Name</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>@ViewBag.SelectedAnimal.Age</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td class="check">@ViewBag.SelectedAnimal.Description</td>
+            </tr>
+            <tr>
+                <th>Category Name</th>               
+                <td> @ViewBag.SelectedAnimal.Category.Name</td>
+                    
+            </tr>
+        </table>
+    </div>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <tr>
+                <th>Comments</th>
+            </tr>
+            @foreach (var comment in ViewBag.SelectedAnimal.Comments)
+            {
+                <tr>
+                    <td>@comment.CommentDescription</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>     
+            <form>
+                <input asp-for="CommentDescription" type="text" placeholder="Add your comments here" />
+                <br />
+                <span asp-validation-for="CommentDescription"></span>
+                <br/>       
+                <button  class="button-84" asp-route-id="@ViewBag.SelectedAnimal.AnimalId" asp-action="AddComment"   asp-controller="Catalog" type="submit" method="post">Add comment</button>
+            </form>  
+    </div>

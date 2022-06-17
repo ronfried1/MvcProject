@@ -1,0 +1,26 @@
+﻿@model IEnumerable<MvcProject.Models.Animal>
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "_Layout";
+}
+
+
+<h1>The Best Pet Shop In Town</h1>
+
+@foreach (var animal in Model)
+{
+
+    <div class="table-wrapper" style="max-width =50%">
+        <p>
+            <img id="img" src="~/Images/@animal.PictureName" alt="A picture of @animal.Name" />
+        </p>
+
+        <p>@animal.Name</p>
+        <p>@animal.Description</p>
+        <p>@animal.Comments.Count &#128488;</p>
+    </div>
+}
+
+
+
+

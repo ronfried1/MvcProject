@@ -1,0 +1,63 @@
+﻿@model MvcProject.Models.Animal
+@{
+    ViewBag.Title = "EditPage";
+    Layout = "_Layout";
+}
+
+<div>
+    <form method="post" enctype="multipart/form-data" asp-action="EditAnimal" asp-controller="Administrator" asp-route-id="@Model.AnimalId">
+
+        <div class="table-wrapper">
+
+            <div>
+                <img id="img" src="~/Images/@Model.PictureName" alt="A picture of @Model.Name" />
+                <br />
+                <input type="file" name="file" accept="Image/*" >
+            </div>
+
+            <div>
+                <label>Name</label>
+                <br />
+                <input asp-for="Name" type="text" required autocomplete="off" />
+            </div>
+
+            <div>
+                <label>Age</label>
+                <br />
+                <input asp-for="Age" type="number" min="1" max="100" />
+            </div>
+
+            <div>
+                <label>Description</label>
+                <br />
+                <textarea asp-for="Description" type="text" style="height:250px; width:450px;"></textarea>
+            </div>
+
+            <div>
+                <select asp-for="CategoryId">
+                    @foreach (var category in @ViewBag.Categories)
+                    {
+                        if (category.CategoryId == Model.CategoryId)
+                        {
+                            <option value="@category.CategoryId" selected>@category.Name </option>
+                        }
+                        else
+                        {
+                            <option value="@category.CategoryId">@category.Name </option>
+
+                        }
+                    }
+                </select>
+            </div>
+            <div>
+                <span asp-validation-for="Name"></span>
+                <br />
+                <span asp-validation-for="Age"></span>
+                <br />
+                <span asp-validation-for="Description"></span>
+            </div>
+            <p><button class="button-84" role="button" type="submit">Save</button></p>
+        </div>
+    </form>
+</div>
+

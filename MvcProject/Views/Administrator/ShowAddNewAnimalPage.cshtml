@@ -1,0 +1,60 @@
+﻿@model MvcProject.Models.Animal
+@{
+    ViewBag.Title = "AddNewAnimalPage";
+    Layout = "_Layout";
+}
+@using (@Html.BeginForm("FileUpload", "FileUpload", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" })) ;
+
+
+<div>
+    <form method="post" enctype="multipart/form-data" asp-action="AddNewAnimal" asp-controller="Administrator">
+        <div class="table-wrapper">
+
+            <div>
+                <label asp-for="Name"></label>
+                <br />
+                <input asp-for="Name" type="text" required autocomplete="off" />              
+            </div>
+
+            <div>
+                <label asp-for="Age"></label>
+                <br />
+                <input asp-for="Age" type="number" min="1" max="100" />             
+            </div>
+
+            <div>
+                <label asp-for="PictureName">Picture</label>
+                <br />
+                <input type="file" name="file" accept="Image/*">
+            </div>
+
+            <div>
+                <label asp-for="Description"></label>
+                <br />
+                <textarea asp-for="Description" type="text" style="height:250px; width:450px;"></textarea>
+            </div>
+
+            <div>
+                <label asp-for="Category"></label>
+                <br />
+                <p>
+                    <select asp-for="CategoryId">
+                        @foreach (var category in @ViewBag.Categories)
+                        {
+                            <option value="@category.CategoryId">@category.Name </option>
+                        }                   
+                    </select>
+                </p>
+            </div>
+            <div>
+                <span asp-validation-for="Name"></span>
+                <br />
+                <span asp-validation-for="Age"></span>
+                <br />
+                <span asp-validation-for="Description"></span>
+            </div>
+            <p><button class="button-84" role="button">Add</button></p>
+        </div>
+    </form>
+</div>
+

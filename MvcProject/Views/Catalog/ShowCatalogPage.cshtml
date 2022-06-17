@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MvcProject.Models.Category>
+@{
+    ViewBag.Title = "CatalogPage";
+    Layout = "_Layout";
+}
+
+<h1>Catalog</h1>
+<p>Please select a category </p>
+
+<p>
+    <select name="category" id="categories" onchange="SelectedCategoryForCatalog()">
+
+        @foreach (var category in Model)
+        {
+            if (category.CategoryId == ViewBag.Id)
+            {
+                <option value="@category.CategoryId" selected>@category.Name</option>
+
+            }
+            else
+            {
+                <option value="@category.CategoryId">@category.Name </option>
+
+            }
+        }
+    </select>
+</p>
+<div class="table-wrapper">
+    <table class="fl-table">
+
+            <thead>
+                <tr>
+                    <th>Portrait</th>
+                    <th>Name</th>
+                    <th>Find more and comment</th>
+                </tr>
+            </thead>
+        @foreach (var animal in ViewBag.animal)
+        {
+            <tbody>
+                <tr>
+
+                    <td><img id="img" src="~/Images/@animal.PictureName"></td>
+                    <td value>@animal.Name</td>
+                    <td><button class="button-84" role="button"> <a asp-action="ShowSelectedAnimalPage" asp-route-Id="@animal.AnimalId" >Details</a></button></td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+
